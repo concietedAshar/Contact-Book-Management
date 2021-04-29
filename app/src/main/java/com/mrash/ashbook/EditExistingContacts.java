@@ -16,7 +16,7 @@ public class EditExistingContacts extends AppCompatActivity {
     Contacts editContacts;
     ImageView imgEContact;
     TextView tvContactName;
-    EditText etEEmail,etEPhoneNo,etEAddress,etEDOB;
+    EditText etEEmail, etEPhoneNo, etEAddress, etEDOB;
     FloatingActionButton fabSaveBack;
 
     @Override
@@ -27,7 +27,7 @@ public class EditExistingContacts extends AppCompatActivity {
         init();
         ///index of item click
         int editContactID = getIntent().getIntExtra("contactID", -1);
-        int index = getIntent().getIntExtra("positionEdit",-1);
+        int index = getIntent().getIntExtra("positionEdit", -1);
 
 
         editContacts = new Contacts();
@@ -39,13 +39,13 @@ public class EditExistingContacts extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(isValidate())
-                { editContacts.setMobileNo(etEPhoneNo.getText().toString());
+                if (isValidate()) {
+                    editContacts.setMobileNo(etEPhoneNo.getText().toString());
                     editContacts.setAddress(etEAddress.getText().toString());
                     editContacts.setEmail(etEEmail.getText().toString());
                     editContacts.setDateOfBirth(etEDOB.getText().toString());
                     dbHandler.updateContact(editContacts);
-                    Intent intent = new Intent(EditExistingContacts.this,com.mrash.ashbook.MainActivity.class);
+                    Intent intent = new Intent(EditExistingContacts.this, com.mrash.ashbook.MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -59,10 +59,10 @@ public class EditExistingContacts extends AppCompatActivity {
         int[] images = Images.getAllImages();
         imgEContact.setImageResource(images[editContacts.getImageId()]);
         tvContactName.setText(editContacts.getName());
-        etEEmail.setText(editContacts.getEmail(),TextView.BufferType.EDITABLE);
-        etEPhoneNo.setText(editContacts.getMobileNo(),TextView.BufferType.EDITABLE);
-        etEAddress.setText(editContacts.getAddress(),TextView.BufferType.EDITABLE);
-        etEDOB.setText(editContacts.getDateOfBirth(),TextView.BufferType.EDITABLE);
+        etEEmail.setText(editContacts.getEmail(), TextView.BufferType.EDITABLE);
+        etEPhoneNo.setText(editContacts.getMobileNo(), TextView.BufferType.EDITABLE);
+        etEAddress.setText(editContacts.getAddress(), TextView.BufferType.EDITABLE);
+        etEDOB.setText(editContacts.getDateOfBirth(), TextView.BufferType.EDITABLE);
     }
 
 
@@ -85,23 +85,19 @@ public class EditExistingContacts extends AppCompatActivity {
         String address = etEAddress.getText().toString();
         String dob = etEDOB.getText().toString();
 
-        if(email.isEmpty() || !email.contains("@") || email.equals(" "))
-        {
+        if (email.isEmpty() || !email.contains("@") || email.equals(" ")) {
             etEEmail.setError("Email");
             flag = false;
         }
-        if(phoneNo.isEmpty() || phoneNo.equals(" "))
-        {
+        if (phoneNo.isEmpty() || phoneNo.equals(" ")) {
             etEPhoneNo.setError("Phone No");
             flag = false;
         }
-        if(address.isEmpty() || address.equals(" "))
-        {
+        if (address.isEmpty() || address.equals(" ")) {
             etEAddress.setError("Address");
             flag = false;
         }
-        if(dob.isEmpty() || dob.equals(" "))
-        {
+        if (dob.isEmpty() || dob.equals(" ")) {
             etEDOB.setError("Date of Birth");
             flag = false;
         }

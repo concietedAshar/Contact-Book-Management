@@ -33,8 +33,14 @@ public class FavContactsAdapter extends RecyclerView.Adapter<FavContactsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvNameFav.setText(contacts.get(position).getName());
-        //abhi image randomize set krni ha
-
+        int images[] = Images.getAllImages(); // Public Static Library
+        holder.imgFav.setImageResource(images[contacts.get(position).getImageId()]);
+        holder.imgDelFav.setVisibility(View.INVISIBLE);
+        holder.imgDelFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
     }
 
     @Override
@@ -43,16 +49,14 @@ public class FavContactsAdapter extends RecyclerView.Adapter<FavContactsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgFav, imgDel;
+        ImageView imgFav, imgDelFav;
         TextView tvNameFav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgFav = itemView.findViewById(R.id.imgFav);
             tvNameFav = itemView.findViewById(R.id.tvNameFav);
-
-            //   imgDel = itemView.findViewById(R.id.imgDel);
-            //  imgDel.setVisibility(View.INVISIBLE);
+            imgDelFav = itemView.findViewById(R.id.imgDelFav);
 
         }//Constructor Ends
     }//viewHolder Class end ->Remind

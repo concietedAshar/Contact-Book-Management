@@ -67,7 +67,7 @@ public class ContactDetail extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent2 = new Intent(ContactDetail.this, com.mrash.ashbook.EditExistingContacts.class);
                 intent2.putExtra("contactID", editContacts.getId());
-                intent2.putExtra("positionEdit",index);
+                intent2.putExtra("positionEdit", index);
                 startActivity(intent2);
                 finish();
             }

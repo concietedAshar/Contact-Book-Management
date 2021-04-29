@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements ContactsAdapter.I
         favContactManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         allContactRV.setLayoutManager(allContactManager);
         favContactRV.setLayoutManager(favContactManager);
-
         fabAddContact = findViewById(R.id.fabAddContact);
-
 
         contacts = new ArrayList<Contacts>();
         contacts = dbHandler.getAllContacts();
@@ -61,12 +59,16 @@ public class MainActivity extends AppCompatActivity implements ContactsAdapter.I
 
         }
 
-
         favContactAdapter = new FavContactsAdapter(this, contacts);
         allContactAdapter = new ContactsAdapter(this, contacts);
         allContactRV.setAdapter(allContactAdapter);
         favContactRV.setAdapter(favContactAdapter);
 
+        addButtonClick();
+        editButtonClick();
+    }
+
+    private void addButtonClick() {
         fabAddContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements ContactsAdapter.I
             }
         });
 
-        //myAdapter1.notifyDataSetChanged();
-        //myAdapter.notifyDataSetChanged();
+    }
 
+    private void editButtonClick() {
 
         imgEdit.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -87,10 +89,13 @@ public class MainActivity extends AppCompatActivity implements ContactsAdapter.I
                 for (int i = 0; i < rv.getChildCount(); i++) {
                     rv.getChildAt(i).findViewById(R.id.imgDel).setVisibility(View.INVISIBLE);
                 }
+                rv = findViewById(R.id.favList);
+                for (int i = 0; i < rv.getChildCount(); i++) {
+                    rv.getChildAt(i).findViewById(R.id.imgDelFav).setVisibility(View.INVISIBLE);
+                }
                 return true;
             }
         });
-
 
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,18 +104,17 @@ public class MainActivity extends AppCompatActivity implements ContactsAdapter.I
                 for (int i = 0; i < rv.getChildCount(); i++) {
                     rv.getChildAt(i).findViewById(R.id.imgDel).setVisibility(View.VISIBLE);
                 }
+                rv = findViewById(R.id.favList);
+                for (int i = 0; i < rv.getChildCount(); i++) {
+                    rv.getChildAt(i).findViewById(R.id.imgDelFav).setVisibility(View.VISIBLE);
+                }
 
             }
         });
 
+
     }
 
-    /*
-        @Override
-        public void onRowItemClick(int index) {
-
-        }
-    */
     @Override
     public void onItemClicked(int index) {
         Intent intent = new Intent(this, com.mrash.ashbook.ContactDetail.class);

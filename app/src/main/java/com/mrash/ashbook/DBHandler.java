@@ -71,7 +71,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         Cursor cursor = sqLiteDatabase.query(
-                 CONTACTS_TABLE,
+                CONTACTS_TABLE,
                 new String[]{ID, IMAGE_ID, NAME, NUMBER, EMAIL, ADDRESS, DATE},
                 ID + "=?",
                 new String[]{String.valueOf(id)},
@@ -137,7 +137,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 );
     }
 
-//when edit please change the ID+"=?" to "id=?" This was error maybe and this.getWritableDatabase()
+    //when edit please change the ID+"=?" to "id=?" This was error maybe and this.getWritableDatabase()
     public void deleteContact(Contacts contacts) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         sqLiteDatabase.delete(CONTACTS_TABLE, ID + "=?", new String[]{String.valueOf(contacts.getId())});

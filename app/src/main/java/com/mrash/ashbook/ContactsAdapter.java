@@ -59,21 +59,26 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             }
         });
 
-        //Needed a great Correction
 
         holder.imgDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHandler dbHandler = new DBHandler(context);
-
                 Contacts c = new Contacts();
-
                 c = contacts.get(me);
 
                 dbHandler.deleteContact(c);
                 notifyDataSetChanged();
             }
         });
+
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myActivity.onItemClicked(contacts.indexOf((Contacts) v.getTag()));
+            }
+        });//setOnClickListener Ends
 
 
     }
@@ -84,8 +89,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         holder.tvEmail.setText(contacts.get(position).getEmail());
         int images[] = Images.getAllImages(); // Public Static Library
         holder.imgContact.setImageResource(images[contacts.get(position).getImageId()]);
-
-
     }
 
     @Override
@@ -96,27 +99,18 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public interface ItemClicked {
         void onItemClicked(int index);
 
-        //    void onRowItemClick(int index);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imgContact, imgDel, imgCall;
         TextView tvName, tvEmail;
+        View mView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             init();
-
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myActivity.onItemClicked(contacts.indexOf((Contacts) itemView.getTag()));
-
-                }
-            });//setOnClickListener Ends
         }//Constructor Ends
 
         private void init() {
@@ -127,7 +121,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             imgCall = itemView.findViewById(R.id.imgCall);
             //Invisible by Default For Main Screen Edit Button
             imgDel.setVisibility(View.INVISIBLE);
+            mView = itemView;
         }
     }//viewHolder Class end ->Remind
-
 }
