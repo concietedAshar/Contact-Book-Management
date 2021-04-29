@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class FavContactsAdapter extends RecyclerView.Adapter<FavContactsAdapter.ViewHolder> {
 
 
-    private ArrayList<Contacts> contacts;
+    private final ArrayList<Contacts> contacts;
 
     public FavContactsAdapter(Context context, ArrayList<Contacts> list) {
         contacts = list;
@@ -33,7 +33,7 @@ public class FavContactsAdapter extends RecyclerView.Adapter<FavContactsAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvNameFav.setText(contacts.get(position).getName());
-        int images[] = Images.getAllImages(); // Public Static Library
+        int[] images = Images.getAllImages(); // Public Static Library
         holder.imgFav.setImageResource(images[contacts.get(position).getImageId()]);
         holder.imgDelFav.setVisibility(View.INVISIBLE);
         holder.imgDelFav.setOnClickListener(new View.OnClickListener() {

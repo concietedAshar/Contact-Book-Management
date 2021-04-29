@@ -24,7 +24,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     static int me;
     ItemClicked myActivity;
     Context context;
-    private ArrayList<Contacts> contacts;
+    private final ArrayList<Contacts> contacts;
 
     public ContactsAdapter(Context context, ArrayList<Contacts> list) {
 
@@ -76,7 +76,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myActivity.onItemClicked(contacts.indexOf((Contacts) v.getTag()));
+                myActivity.onItemClicked(contacts.indexOf(v.getTag()));
             }
         });//setOnClickListener Ends
 
@@ -87,7 +87,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         holder.itemView.setTag(contacts.get(position));
         holder.tvName.setText(contacts.get(position).getName());
         holder.tvEmail.setText(contacts.get(position).getEmail());
-        int images[] = Images.getAllImages(); // Public Static Library
+        int[] images = Images.getAllImages(); // Public Static Library
         holder.imgContact.setImageResource(images[contacts.get(position).getImageId()]);
     }
 

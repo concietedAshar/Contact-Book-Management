@@ -34,7 +34,7 @@ public class AddNewContact extends AppCompatActivity {
                 if (isValidate()) {
 
                     //Random Image Picker From Stating Image Library to New Contacts
-                    int images[] = Images.getAllImages();
+                    int[] images = Images.getAllImages();
                     Random random = new Random();
                     int index = random.nextInt(images.length); // give Random index relative to Image Library
                     imgAddContact.setImageResource(images[index]); // set Image
